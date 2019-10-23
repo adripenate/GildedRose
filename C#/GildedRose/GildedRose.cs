@@ -4,10 +4,14 @@ namespace GildedRose
 {
     public class GildedRose
     {
-        private const string AGEDBRIE_ITEM = "Aged Brie";
-        private const string BACKSTAGE_PASSES_ITEM = "Backstage passes to a TAFKAL80ETC concert";
-        private const string SULFURAS_ITEM = "Sulfuras, Hand of Ragnaros";
-        private const int QUALITY_LOW_LIMIT = 0;
+        private const string AgedBrieItem = "Aged Brie";
+        private const string BackstagePassesItem = "Backstage passes to a TAFKAL80ETC concert";
+        private const string SulfurasItem = "Sulfuras, Hand of Ragnaros";
+        private const int QualityLowLimit = 0;
+        private const int QualityHighLimit = 50;
+        private const int SellinLimitDropQualityByTwo = 11;
+        private const int SellinLimitDropQualityByThree = 6;
+        private const int SellinLowLimit = 0;
 
         IList<Item> Items;
         public GildedRose(IList<Item> Items)
@@ -21,9 +25,9 @@ namespace GildedRose
             {
                 if (!isAgedBrie(Items[i].Name) && !isBackstagePasses(Items[i].Name))
                 {
-                    if (Items[i].Quality > QUALITY_LOW_LIMIT)
+                    if (Items[i].Quality > QualityLowLimit)
                     {
-                        if (Items[i].Name != SULFURAS_ITEM)
+                        if (Items[i].Name != SulfurasItem)
                         {
                             Items[i].Quality = Items[i].Quality - 1;
                         }
@@ -31,23 +35,23 @@ namespace GildedRose
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    if (Items[i].Quality < QualityHighLimit)
                     {
                         Items[i].Quality = Items[i].Quality + 1;
 
                         if (isBackstagePasses(Items[i].Name))
                         {
-                            if (Items[i].SellIn < 11)
+                            if (Items[i].SellIn < SellinLimitDropQualityByTwo)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < QualityHighLimit)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
                             }
 
-                            if (Items[i].SellIn < 6)
+                            if (Items[i].SellIn < SellinLimitDropQualityByThree)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < QualityHighLimit)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
@@ -56,20 +60,20 @@ namespace GildedRose
                     }
                 }
 
-                if (Items[i].Name != SULFURAS_ITEM)
+                if (Items[i].Name != SulfurasItem)
                 {
                     Items[i].SellIn = Items[i].SellIn - 1;
                 }
 
-                if (Items[i].SellIn < 0)
+                if (Items[i].SellIn < SellinLowLimit)
                 {
                     if (!isAgedBrie(Items[i].Name))
                     {
                         if (!isBackstagePasses(Items[i].Name))
                         {
-                            if (Items[i].Quality > QUALITY_LOW_LIMIT)
+                            if (Items[i].Quality > QualityLowLimit)
                             {
-                                if (Items[i].Name != SULFURAS_ITEM)
+                                if (Items[i].Name != SulfurasItem)
                                 {
                                     Items[i].Quality = Items[i].Quality - 1;
                                 }
@@ -82,7 +86,7 @@ namespace GildedRose
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
+                        if (Items[i].Quality < QualityHighLimit)
                         {
                             Items[i].Quality = Items[i].Quality + 1;
                         }
@@ -93,12 +97,12 @@ namespace GildedRose
 
         private bool isBackstagePasses(string itemName)
         {
-            return itemName == BACKSTAGE_PASSES_ITEM;
+            return itemName == BackstagePassesItem;
         }
 
         private bool isAgedBrie(string itemName)
         {
-            return itemName == AGEDBRIE_ITEM;
+            return itemName == AgedBrieItem;
         }
     }
 }
