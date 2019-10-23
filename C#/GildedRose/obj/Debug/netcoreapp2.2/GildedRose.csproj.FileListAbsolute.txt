@@ -1,0 +1,8 @@
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose\bin\Debug\netcoreapp2.2\GildedRose.deps.json
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose\bin\Debug\netcoreapp2.2\GildedRose.dll
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose\bin\Debug\netcoreapp2.2\GildedRose.pdb
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose\obj\Debug\netcoreapp2.2\GildedRose.csprojAssemblyReference.cache
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose\obj\Debug\netcoreapp2.2\GildedRose.AssemblyInfoInputs.cache
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose\obj\Debug\netcoreapp2.2\GildedRose.AssemblyInfo.cs
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose\obj\Debug\netcoreapp2.2\GildedRose.dll
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose\obj\Debug\netcoreapp2.2\GildedRose.pdb

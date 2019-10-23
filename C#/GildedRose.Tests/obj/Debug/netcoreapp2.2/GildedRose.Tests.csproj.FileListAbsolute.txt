@@ -1,0 +1,16 @@
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.dll
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\NUnit3.TestAdapter.pdb
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\nunit.engine.netstandard.dll
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\GildedRose.Tests.deps.json
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\GildedRose.Tests.runtimeconfig.json
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\GildedRose.Tests.runtimeconfig.dev.json
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\GildedRose.Tests.dll
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\GildedRose.Tests.pdb
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\GildedRose.dll
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\bin\Debug\netcoreapp2.2\GildedRose.pdb
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\obj\Debug\netcoreapp2.2\GildedRose.Tests.csprojAssemblyReference.cache
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\obj\Debug\netcoreapp2.2\GildedRose.Tests.AssemblyInfoInputs.cache
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\obj\Debug\netcoreapp2.2\GildedRose.Tests.AssemblyInfo.cs
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\obj\Debug\netcoreapp2.2\GildedRose.Tests.csproj.CopyComplete
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\obj\Debug\netcoreapp2.2\GildedRose.Tests.dll
+C:\Users\apenate\Desktop\GildedRose\C#\GildedRose.Tests\obj\Debug\netcoreapp2.2\GildedRose.Tests.pdb
