@@ -62,7 +62,7 @@ namespace GildedRose
 
                 if (!IsSulfurasItem(Items[i].Name))
                 {
-                    Items[i].SellIn = Items[i].SellIn - 1;
+                    UpdateSellIn(Items[i], -1);
                 }
 
                 if (IsBellowSellInLimit(Items[i].SellIn))
@@ -93,6 +93,11 @@ namespace GildedRose
                     }
                 }
             }
+        }
+
+        private void UpdateSellIn(Item item, int update)
+        {
+            item.SellIn += update;
         }
 
         private void UpdateQuality(Item item, int update)
