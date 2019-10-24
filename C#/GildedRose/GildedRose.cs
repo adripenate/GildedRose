@@ -23,6 +23,11 @@ namespace GildedRose
         {
             for (var i = 0; i < Items.Count; i++)
             {
+                if (!IsSulfurasItem(Items[i].Name))
+                {
+                    UpdateSellIn(Items[i], -1);
+                }
+
                 if (!IsAgedBrie(Items[i].Name) && !IsBackstagePasses(Items[i].Name) && !IsSulfurasItem(Items[i].Name))
                 {
                     if (IsAboveQualityLowLimit(Items[i].Quality))
@@ -53,13 +58,13 @@ namespace GildedRose
                                     UpdateQuality(Items[i], 1);
                                 }
                             }
+
+                            if (IsBellowSellInLimit(Items[i].SellIn))
+                            {
+                                UpdateQuality(Items[i], -Items[i].Quality);
+                            }
                         }
                     }
-                }
-
-                if (!IsSulfurasItem(Items[i].Name))
-                {
-                    UpdateSellIn(Items[i], -1);
                 }
 
                 if (IsBellowSellInLimit(Items[i].SellIn))
@@ -75,10 +80,6 @@ namespace GildedRose
                                     UpdateQuality(Items[i], -1);
                                 }
                             }
-                        }
-                        else
-                        {
-                            UpdateQuality(Items[i], -Items[i].Quality);
                         }
                     }
                     else
