@@ -35,39 +35,35 @@ namespace GildedRose
                         UpdateQuality(Items[i], -1);
                     }
                 }
+                else if (IsBackstagePasses(Items[i].Name))
+                {
+                    UpdateQuality(Items[i], 1);
+
+                    if (IsBellowSellInLimitDropByTwo(Items[i].SellIn) && IsBellowQualityHighLimit(Items[i].Quality))
+                    {
+                        UpdateQuality(Items[i], 1);
+                    }
+
+                    if (IsBellowSellInLimitDropByThree(Items[i].SellIn) && IsBellowQualityHighLimit(Items[i].Quality))
+                    {
+                        UpdateQuality(Items[i], 1);
+                    }
+
+                    if (IsBellowSellInLowLimit(Items[i].SellIn))
+                    {
+                        UpdateQuality(Items[i], -Items[i].Quality);
+                    }
+                }
                 else
                 {
                     if (IsBellowQualityHighLimit(Items[i].Quality))
                     {
                         UpdateQuality(Items[i], 1);
 
-                        if (IsBackstagePasses(Items[i].Name))
-                        {
-                            if (IsBellowSellInLimitDropByTwo(Items[i].SellIn))
-                            {
-                                if (IsBellowQualityHighLimit(Items[i].Quality))
-                                {
-                                    UpdateQuality(Items[i], 1);
-                                }
-                            }
-
-                            if (IsBellowSellInLimitDropByThree(Items[i].SellIn))
-                            {
-                                if (IsBellowQualityHighLimit(Items[i].Quality))
-                                {
-                                    UpdateQuality(Items[i], 1);
-                                }
-                            }
-
-                            if (IsBellowSellInLimit(Items[i].SellIn))
-                            {
-                                UpdateQuality(Items[i], -Items[i].Quality);
-                            }
-                        }
                     }
                 }
 
-                if (IsBellowSellInLimit(Items[i].SellIn))
+                if (IsBellowSellInLowLimit(Items[i].SellIn))
                 {
                     if (IsAgedBrie(Items[i].Name) && IsBellowQualityHighLimit(Items[i].Quality))
                     {
@@ -92,7 +88,7 @@ namespace GildedRose
             item.Quality += update;
         }
 
-        private bool IsBellowSellInLimit(int sellIn)
+        private bool IsBellowSellInLowLimit(int sellIn)
         {
             return sellIn < SellInLowLimit;
         }
