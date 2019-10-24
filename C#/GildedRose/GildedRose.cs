@@ -23,14 +23,11 @@ namespace GildedRose
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (!IsAgedBrie(Items[i].Name) && !IsBackstagePasses(Items[i].Name))
+                if (!IsAgedBrie(Items[i].Name) && !IsBackstagePasses(Items[i].Name) && !IsSulfurasItem(Items[i].Name))
                 {
                     if (IsAboveQualityLowLimit(Items[i].Quality))
                     {
-                        if (!IsSulfurasItem(Items[i].Name))
-                        {
-                            UpdateQuality(Items[i], -1);
-                        }
+                        UpdateQuality(Items[i], -1);
                     }
                 }
                 else
