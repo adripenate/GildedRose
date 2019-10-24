@@ -41,7 +41,7 @@ namespace GildedRose
 
                         if (IsBackstagePasses(Items[i].Name))
                         {
-                            if (Items[i].SellIn < SellInLimitDropQualityByTwo)
+                            if (IsBellowSellInLimitDropByTwo(Items[i].SellIn))
                             {
                                 if (IsBellowQualityHighLimit(Items[i].Quality))
                                 {
@@ -49,7 +49,7 @@ namespace GildedRose
                                 }
                             }
 
-                            if (Items[i].SellIn < SellInLimitDropQualityByThree)
+                            if (IsBellowSellInLimitDropByThree(Items[i].SellIn))
                             {
                                 if (IsBellowQualityHighLimit(Items[i].Quality))
                                 {
@@ -65,7 +65,7 @@ namespace GildedRose
                     Items[i].SellIn = Items[i].SellIn - 1;
                 }
 
-                if (Items[i].SellIn < SellInLowLimit)
+                if (IsBellowSellInLimit(Items[i].SellIn))
                 {
                     if (!IsAgedBrie(Items[i].Name))
                     {
@@ -93,6 +93,21 @@ namespace GildedRose
                     }
                 }
             }
+        }
+
+        private bool IsBellowSellInLimit(int sellIn)
+        {
+            return sellIn < SellInLowLimit;
+        }
+
+        private bool IsBellowSellInLimitDropByThree(int sellIn)
+        {
+            return sellIn < SellInLimitDropQualityByThree;
+        }
+
+        private bool IsBellowSellInLimitDropByTwo(int sellIn)
+        {
+            return sellIn < SellInLimitDropQualityByTwo;
         }
 
         private bool IsBellowQualityHighLimit(int quality)
