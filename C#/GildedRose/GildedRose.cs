@@ -69,26 +69,15 @@ namespace GildedRose
 
                 if (IsBellowSellInLimit(Items[i].SellIn))
                 {
-                    if (!IsAgedBrie(Items[i].Name))
+                    if (IsAgedBrie(Items[i].Name) && IsBellowQualityHighLimit(Items[i].Quality))
                     {
-                        if (!IsBackstagePasses(Items[i].Name))
-                        {
-                            if (IsAboveQualityLowLimit(Items[i].Quality))
-                            {
-                                if (!IsSulfurasItem(Items[i].Name))
-                                {
-                                    UpdateQuality(Items[i], -1);
-                                }
-                            }
-                        }
+                        UpdateQuality(Items[i], 1);
                     }
-                    else
+                    else if (!IsBackstagePasses(Items[i].Name) && !IsSulfurasItem(Items[i].Name) && IsAboveQualityLowLimit(Items[i].Quality))
                     {
-                        if (IsBellowQualityHighLimit(Items[i].Quality))
-                        {
-                            UpdateQuality(Items[i], 1);
-                        }
+                        UpdateQuality(Items[i], -1);
                     }
+                    
                 }
             }
         }
