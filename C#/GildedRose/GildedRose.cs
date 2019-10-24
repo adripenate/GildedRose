@@ -29,7 +29,7 @@ namespace GildedRose
                     {
                         if (!IsSulfurasItem(Items[i].Name))
                         {
-                            Items[i].Quality = Items[i].Quality - 1;
+                            UpdateQuality(Items[i], -1);
                         }
                     }
                 }
@@ -37,7 +37,7 @@ namespace GildedRose
                 {
                     if (IsBellowQualityHighLimit(Items[i].Quality))
                     {
-                        Items[i].Quality = Items[i].Quality + 1;
+                        UpdateQuality(Items[i], 1);
 
                         if (IsBackstagePasses(Items[i].Name))
                         {
@@ -45,7 +45,7 @@ namespace GildedRose
                             {
                                 if (IsBellowQualityHighLimit(Items[i].Quality))
                                 {
-                                    Items[i].Quality = Items[i].Quality + 1;
+                                    UpdateQuality(Items[i], 1);
                                 }
                             }
 
@@ -53,7 +53,7 @@ namespace GildedRose
                             {
                                 if (IsBellowQualityHighLimit(Items[i].Quality))
                                 {
-                                    Items[i].Quality = Items[i].Quality + 1;
+                                    UpdateQuality(Items[i], 1);
                                 }
                             }
                         }
@@ -75,24 +75,29 @@ namespace GildedRose
                             {
                                 if (!IsSulfurasItem(Items[i].Name))
                                 {
-                                    Items[i].Quality = Items[i].Quality - 1;
+                                    UpdateQuality(Items[i], -1);
                                 }
                             }
                         }
                         else
                         {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
+                            UpdateQuality(Items[i], -Items[i].Quality);
                         }
                     }
                     else
                     {
                         if (IsBellowQualityHighLimit(Items[i].Quality))
                         {
-                            Items[i].Quality = Items[i].Quality + 1;
+                            UpdateQuality(Items[i], 1);
                         }
                     }
                 }
             }
+        }
+
+        private void UpdateQuality(Item item, int update)
+        {
+            item.Quality += update;
         }
 
         private bool IsBellowSellInLimit(int sellIn)
