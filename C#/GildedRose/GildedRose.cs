@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GildedRose
 {
@@ -17,16 +18,15 @@ namespace GildedRose
         public GildedRose(IList<Item> Items)
         {
             this.Items = Items;
+            ItemFactory itemFactory = new ItemFactory();
         }
 
         public void UpdateQuality()
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (!IsSulfurasItem(Items[i].Name))
-                {
-                    UpdateSellIn(Items[i], -1);
-                }
+                CustomItem customItem = ItemFactory.CreateCustomItem(Items[i]);
+                customItem.UpdateSellIn(Items[i]);
 
                 if (!IsAgedBrie(Items[i].Name) && !IsBackstagePasses(Items[i].Name) && !IsSulfurasItem(Items[i].Name))
                 {
@@ -65,11 +65,6 @@ namespace GildedRose
                 }
 
             }
-        }
-
-        private void UpdateSellIn(Item item, int update)
-        {
-            item.SellIn += update;
         }
 
         private void UpdateQuality(Item item, int update)
@@ -116,5 +111,85 @@ namespace GildedRose
         {
             return itemName == AgedBrieItem;
         }
+    }
+
+    public class ItemFactory
+    {
+        private const string AgedBrieItem = "Aged Brie";
+        private const string BackstagePassesItem = "Backstage passes to a TAFKAL80ETC concert";
+        private const string SulfurasItem = "Sulfuras, Hand of Ragnaros";
+        private static Dictionary<string, Func<CustomItem>> factories = new Dictionary<string, Func<CustomItem>>
+        {
+            {AgedBrieItem, () => new AgedBrieItem() },
+            {BackstagePassesItem, () => new BackstagePassesItem() },
+            {SulfurasItem, () => new SulfurasItem() }
+        };
+
+        public static CustomItem CreateCustomItem(Item item)
+        {
+            if (factories.ContainsKey(item.Name))
+            {
+                return factories[item.Name].Invoke();
+            }
+            return new RegularItem();
+        }
+    }
+
+    public class RegularItem : CustomItem
+    {
+        public void UpdateSellIn(Item item)
+        {
+            item.SellIn -= 1;
+        }
+
+        public void UpdateQuality(Item item, int update)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class SulfurasItem : CustomItem
+    {
+        public void UpdateSellIn(Item item)
+        {
+            item.SellIn += 0;
+        }
+
+        public void UpdateQuality(Item item, int update)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class BackstagePassesItem : CustomItem
+    {
+        public void UpdateSellIn(Item item)
+        {
+            item.SellIn -= 1;
+        }
+
+        public void UpdateQuality(Item item, int update)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class AgedBrieItem : CustomItem
+    {
+        public void UpdateSellIn(Item item)
+        {
+            item.SellIn -= 1;
+        }
+
+        public void UpdateQuality(Item item, int update)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public interface CustomItem
+    {
+        void UpdateSellIn(Item item);
+        void UpdateQuality(Item item, int update);
     }
 }
