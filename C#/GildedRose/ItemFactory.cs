@@ -26,7 +26,6 @@ namespace GildedRose
     public class ConjuredItem : CustomItem
     {
         private const int QualityLowLimit = 0;
-        private const int SellInLowLimit = 0;
 
         public void UpdateSellIn(Item item)
         {
@@ -35,24 +34,24 @@ namespace GildedRose
 
         public void UpdateQuality(Item item)
         {
-            if (IsAboveQualityLowLimit(item.Quality)) DecreaseQuality(item);
-            if (IsAboveQualityLowLimit(item.Quality)) DecreaseQuality(item);
+            DecreaseQualityTwiceAsFast(item);
+        }
+
+        private void DecreaseQualityTwiceAsFast(Item item)
+        {
+            DecreaseQuality(item);
+            DecreaseQuality(item);
         }
 
 
-        private static void DecreaseQuality(Item item)
+        private void DecreaseQuality(Item item)
         {
-            item.Quality -= 1;
+            if (IsAboveQualityLowLimit(item.Quality)) item.Quality -= 1;
         }
 
         private bool IsAboveQualityLowLimit(int quality)
         {
             return quality > QualityLowLimit;
-        }
-
-        private bool IsBellowSellInLowLimit(int sellIn)
-        {
-            return sellIn < SellInLowLimit;
         }
     }
 }
