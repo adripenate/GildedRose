@@ -28,19 +28,11 @@ namespace GildedRose
                 CustomItem customItem = ItemFactory.CreateCustomItem(Items[i]);
                 customItem.UpdateSellIn(Items[i]);
 
-                if (!IsAgedBrie(Items[i].Name) && !IsBackstagePasses(Items[i].Name) && !IsSulfurasItem(Items[i].Name))
+                if (!IsBackstagePasses(Items[i].Name) && !IsAgedBrie(Items[i].Name))
                 {
-                    if (IsAboveQualityLowLimit(Items[i].Quality))
-                    {
-                        UpdateQuality(Items[i], -1);
-                    }
-
-                    if (IsAboveQualityLowLimit(Items[i].Quality) && IsBellowSellInLowLimit(Items[i].SellIn))
-                    {
-                        UpdateQuality(Items[i], -1);
-                    }
+                    customItem.UpdateQuality(Items[i]);
                 }
-                else if (IsBackstagePasses(Items[i].Name))
+                if (IsBackstagePasses(Items[i].Name))
                 {
                     UpdateQuality(Items[i], 1);
 
@@ -127,24 +119,39 @@ namespace GildedRose
 
         public static CustomItem CreateCustomItem(Item item)
         {
-            if (factories.ContainsKey(item.Name))
-            {
-                return factories[item.Name].Invoke();
-            }
-            return new RegularItem();
+            return factories.ContainsKey(item.Name) ? factories[item.Name].Invoke() : new RegularItem();
         }
     }
 
     public class RegularItem : CustomItem
     {
+        private const int QualityLowLimit = 0;
+        private const int SellInLowLimit = 0;
+
         public void UpdateSellIn(Item item)
         {
             item.SellIn -= 1;
         }
 
-        public void UpdateQuality(Item item, int update)
+        public void UpdateQuality(Item item)
         {
-            throw new System.NotImplementedException();
+            if (IsAboveQualityLowLimit(item.Quality)) DecreaseQuality(item);
+            if (IsAboveQualityLowLimit(item.Quality) && IsBellowSellInLowLimit(item.SellIn)) DecreaseQuality(item);
+        }
+
+        private static void DecreaseQuality(Item item)
+        {
+            item.Quality -= 1;
+        }
+
+        private bool IsAboveQualityLowLimit(int quality)
+        {
+            return quality > QualityLowLimit;
+        }
+
+        private bool IsBellowSellInLowLimit(int sellIn)
+        {
+            return sellIn < SellInLowLimit;
         }
     }
 
@@ -155,9 +162,9 @@ namespace GildedRose
             item.SellIn += 0;
         }
 
-        public void UpdateQuality(Item item, int update)
+        public void UpdateQuality(Item item)
         {
-            throw new System.NotImplementedException();
+            item.SellIn += 0;
         }
     }
 
@@ -168,7 +175,7 @@ namespace GildedRose
             item.SellIn -= 1;
         }
 
-        public void UpdateQuality(Item item, int update)
+        public void UpdateQuality(Item item)
         {
             throw new System.NotImplementedException();
         }
@@ -181,7 +188,7 @@ namespace GildedRose
             item.SellIn -= 1;
         }
 
-        public void UpdateQuality(Item item, int update)
+        public void UpdateQuality(Item item)
         {
             throw new System.NotImplementedException();
         }
@@ -190,6 +197,6 @@ namespace GildedRose
     public interface CustomItem
     {
         void UpdateSellIn(Item item);
-        void UpdateQuality(Item item, int update);
+        void UpdateQuality(Item item);
     }
 }
