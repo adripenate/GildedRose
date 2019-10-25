@@ -5,9 +5,7 @@ namespace GildedRose
 {
     public class GildedRose
     {
-        private const string AgedBrieItem = "Aged Brie";
-        private const int QualityHighLimit = 50;
-
+        
         IList<Item> Items;
         public GildedRose(IList<Item> Items)
         {
@@ -19,33 +17,9 @@ namespace GildedRose
             for (var i = 0; i < Items.Count; i++)
             {
                 CustomItem customItem = ItemFactory.CreateCustomItem(Items[i]);
-                customItem.UpdateSellIn(Items[i]);
-
-                if (!IsAgedBrie(Items[i].Name))
-                {
-                    customItem.UpdateQuality(Items[i]);
-                }
-                else if (IsAgedBrie(Items[i].Name) && IsBellowQualityHighLimit(Items[i].Quality))
-                {
-                    UpdateQuality(Items[i], 1);
-                }
-
+                customItem.UpdateSellIn(Items[i]); 
+                customItem.UpdateQuality(Items[i]);
             }
-        }
-
-        private void UpdateQuality(Item item, int update)
-        {
-            item.Quality += update;
-        }
-
-        private bool IsBellowQualityHighLimit(int quality)
-        {
-            return quality < QualityHighLimit;
-        }
-
-        private bool IsAgedBrie(string itemName)
-        {
-            return itemName == AgedBrieItem;
         }
     }
 
@@ -162,6 +136,8 @@ namespace GildedRose
 
     public class AgedBrieItem : CustomItem
     {
+        private const int QualityHighLimit = 50;
+
         public void UpdateSellIn(Item item)
         {
             item.SellIn -= 1;
@@ -169,7 +145,12 @@ namespace GildedRose
 
         public void UpdateQuality(Item item)
         {
-            throw new System.NotImplementedException();
+            if (IsBellowQualityHighLimit(item.Quality)) item.Quality += 1;
+        }
+
+        private bool IsBellowQualityHighLimit(int quality)
+        {
+            return quality < QualityHighLimit;
         }
     }
 
