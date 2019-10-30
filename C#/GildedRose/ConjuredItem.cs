@@ -12,6 +12,8 @@
         public void UpdateQuality(Item item)
         {
             DecreaseQualityTwiceAsFast(item);
+            if(item.SellIn < 0) DecreaseQuality(item);
+            if (item.SellIn < 0) DecreaseQuality(item);
         }
 
         private void DecreaseQualityTwiceAsFast(Item item)
