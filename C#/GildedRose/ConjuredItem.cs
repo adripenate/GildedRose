@@ -20,7 +20,6 @@
             DecreaseQuality(item);
         }
 
-
         private void DecreaseQuality(Item item)
         {
             if (IsAboveQualityLowLimit(item.Quality)) item.Quality -= 1;
