@@ -16,11 +16,21 @@
         {
             IncreaseQuality(item);
 
-            if (IsBellowSellInLimitDropByTwo(item.SellIn) && IsBellowQualityHighLimit(item.Quality)) IncreaseQuality(item);
+            if (CanIncreaseByTwo(item)) IncreaseQuality(item);
             
-            if (IsBellowSellInLimitDropByThree(item.SellIn) && IsBellowQualityHighLimit(item.Quality)) IncreaseQuality(item);
+            if (CanIncreaseByThree(item)) IncreaseQuality(item);
             
             if (IsBellowSellInLowLimit(item.SellIn)) item.Quality = 0;
+        }
+
+        private bool CanIncreaseByThree(Item item)
+        {
+            return IsBellowSellInLimitDropByThree(item.SellIn) && IsBellowQualityHighLimit(item.Quality);
+        }
+
+        private bool CanIncreaseByTwo(Item item)
+        {
+            return IsBellowSellInLimitDropByTwo(item.SellIn) && IsBellowQualityHighLimit(item.Quality);
         }
 
         private void IncreaseQuality(Item item)
