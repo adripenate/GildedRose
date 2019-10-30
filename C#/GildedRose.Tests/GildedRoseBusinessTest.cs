@@ -15,7 +15,8 @@ namespace GildedRoseCSharp.Test {
                                               new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
                                               new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
                                               new Item {Name = "Backstage passes to a TAFKAL80ETC concert",SellIn = 15,Quality = 20},
-                                              new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+                                              new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6},
+                                              new Item {Name = "Conjured", SellIn = 1, Quality = 20}
                                           };
 
             var app = new GildedRose.GildedRose(Items);
@@ -28,9 +29,9 @@ namespace GildedRoseCSharp.Test {
                                               new Item {Name = "Elixir of the Mongoose", SellIn = 4, Quality = 6},
                                               new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
                                               new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 14, Quality = 21},
-                                              new Item {Name = "Conjured Mana Cake", SellIn = 2, Quality = 5}
+                                              new Item {Name = "Conjured Mana Cake", SellIn = 2, Quality = 5},
+                                              new Item {Name = "Conjured", SellIn = 0, Quality = 18 }
                                           };
-
 
             expectedOutput[0].Should().BeEquivalentTo(Items[0]);
             expectedOutput[1].Should().BeEquivalentTo(Items[1]);
@@ -38,6 +39,7 @@ namespace GildedRoseCSharp.Test {
             expectedOutput[3].Should().BeEquivalentTo(Items[3]);
             expectedOutput[4].Should().BeEquivalentTo(Items[4]);
             expectedOutput[5].Should().BeEquivalentTo(Items[5]);
+            expectedOutput[6].Should().BeEquivalentTo(Items[6]);
         }
 
 
@@ -154,24 +156,13 @@ namespace GildedRoseCSharp.Test {
         [Test]
         public void shouldZerotheQualityAfterSellInDate_BackstagePasses()
         {
-            List<Item> Items = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 20 } };
+            List<Item> Items = new List<Item>()
+                {new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 20}};
             var app = new GildedRose.GildedRose(Items);
             app.UpdateQuality();
 
-            List<Item> expectedOutput = new List<Item>() { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = -1, Quality = 0 } };
-
-            expectedOutput[0].Should().BeEquivalentTo(Items[0]);
-
-        }
-
-        [Test]
-        public void should_degrade_conjured_item_quality_twice_as_fast()
-        {
-            List<Item> Items = new List<Item>() { new Item { Name = "Conjured", SellIn = 1, Quality = 20 } };
-            var app = new GildedRose.GildedRose(Items);
-            app.UpdateQuality();
-
-            List<Item> expectedOutput = new List<Item>() { new Item { Name = "Conjured", SellIn = 0, Quality = 18 } };
+            List<Item> expectedOutput = new List<Item>()
+                {new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = -1, Quality = 0}};
 
             expectedOutput[0].Should().BeEquivalentTo(Items[0]);
 
