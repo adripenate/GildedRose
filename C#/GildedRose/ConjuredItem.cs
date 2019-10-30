@@ -13,7 +13,12 @@
         public void UpdateQuality(Item item)
         {
             DecreaseQualityTwiceAsFast(item);
-            if(item.SellIn < SellInLowLimit) DecreaseQualityTwiceAsFast(item);
+            if(IsBellowSellInLowLimit(item.SellIn)) DecreaseQualityTwiceAsFast(item);
+        }
+
+        private static bool IsBellowSellInLowLimit(int sellIn)
+        {
+            return sellIn < SellInLowLimit;
         }
 
         private void DecreaseQualityTwiceAsFast(Item item)
