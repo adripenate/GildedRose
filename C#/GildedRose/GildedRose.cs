@@ -13,11 +13,11 @@ namespace GildedRose
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
+            foreach (var item in Items)
             {
-                CustomItem customItem = ItemFactory.CreateCustomItem(Items[i]);
-                customItem.UpdateSellIn(Items[i]); 
-                customItem.UpdateQuality(Items[i]);
+                CustomItem customItem = ItemFactory.CreateCustomItem(item);
+                customItem.UpdateSellIn(item); 
+                customItem.UpdateQuality(item);
             }
         }
     }
