@@ -2,6 +2,7 @@
 {
     public class ConjuredItem : CustomItem
     {
+        private const int SellInLowLimit = 0;
         private const int QualityLowLimit = 0;
 
         public void UpdateSellIn(Item item)
@@ -12,8 +13,7 @@
         public void UpdateQuality(Item item)
         {
             DecreaseQualityTwiceAsFast(item);
-            if(item.SellIn < 0) DecreaseQuality(item);
-            if (item.SellIn < 0) DecreaseQuality(item);
+            if(item.SellIn < SellInLowLimit) DecreaseQualityTwiceAsFast(item);
         }
 
         private void DecreaseQualityTwiceAsFast(Item item)
